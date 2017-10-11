@@ -8,5 +8,7 @@ namespace Core.Payment.DAL
 {
     public class Class1
     {
+
+
     }
 }
