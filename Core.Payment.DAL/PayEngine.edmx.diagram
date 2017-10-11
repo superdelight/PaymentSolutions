@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8f31498becec40489d2dd858bebacdb1" Name="Diagram1">
+        <EntityTypeShape EntityType="Payment_DEVModel.AccountDetail" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Payment_DEVModel.Bank" Width="1.5" PointX="3.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Payment_DEVModel.DayPeriod" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="Payment_DEVModel.FiscalPeriod" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Payment_DEVModel.MonthPeriod" Width="1.5" PointX="5.25" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Payment_DEVModel.Payer" Width="1.5" PointX="5.25" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="Payment_DEVModel.Payment" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Payment_DEVModel.PaymentEngine" Width="1.5" PointX="3.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Payment_DEVModel.PaymentInvoice" Width="1.5" PointX="11.25" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Payment_DEVModel.Period" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Payment_DEVModel.School" Width="1.5" PointX="1.5" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Payment_DEVModel.SplitPayment" Width="1.5" PointX="8.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Payment_DEVModel.TransactionLog" Width="1.5" PointX="8.25" PointY="9.625" IsExpanded="true" />
+        <AssociationConnector Association="Payment_DEVModel.FK_AccountDetails_Bank" ManuallyRouted="false" />
+        <AssociationConnector Association="Payment_DEVModel.FK_SplitPayment_AccountDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="Payment_DEVModel.FK_DayPeriod_MonthPeriod" ManuallyRouted="false" />
+        <AssociationConnector Association="Payment_DEVModel.FK_DayPeriod_Period" ManuallyRouted="false" />
+        <AssociationConnector Association="Payment_DEVModel.FK_TransactionLog_DayPeriod" ManuallyRouted="false" />
+        <AssociationConnector Association="Payment_DEVModel.FK_FiscalPeriod_Period" ManuallyRouted="false" />
+        <AssociationConnector Association="Payment_DEVModel.FK_MonthPeriod_FiscalPeriod" ManuallyRouted="false" />
+        <AssociationConnector Association="Payment_DEVModel.FK_Payer_FiscalPeriod" ManuallyRouted="false" />
+        <AssociationConnector Association="Payment_DEVModel.FK_MonthPeriod_Period" ManuallyRouted="false" />
+        <AssociationConnector Association="Payment_DEVModel.FK_Payer_School" ManuallyRouted="false" />
+        <AssociationConnector Association="Payment_DEVModel.FK_PaymentInvoice_Payer" ManuallyRouted="false" />
+        <AssociationConnector Association="Payment_DEVModel.FK_Payment_Payment" ManuallyRouted="false" />
+        <AssociationConnector Association="Payment_DEVModel.FK_Payment_PaymentEngine" ManuallyRouted="false" />
+        <AssociationConnector Association="Payment_DEVModel.FK_Payment_Period" ManuallyRouted="false" />
+        <AssociationConnector Association="Payment_DEVModel.FK_Payment_School" ManuallyRouted="false" />
+        <AssociationConnector Association="Payment_DEVModel.FK_PaymentInvoice_Payment" ManuallyRouted="false" />
+        <AssociationConnector Association="Payment_DEVModel.FK_SplitPayment_Payment" ManuallyRouted="false" />
+        <AssociationConnector Association="Payment_DEVModel.FK_PaymentEngine_School" ManuallyRouted="false" />
+        <AssociationConnector Association="Payment_DEVModel.FK_TransactionLog_PaymentInvoice" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

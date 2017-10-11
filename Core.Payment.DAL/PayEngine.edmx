@@ -1,0 +1,1172 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Payment_DEVModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AccountDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="AccountName" Type="nvarchar(max)" />
+          <Property Name="AccountType" Type="nvarchar(max)" />
+          <Property Name="BkId" Type="int" />
+        </EntityType>
+        <EntityType Name="Bank">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BankName" Type="nvarchar(max)" />
+          <Property Name="Acronyms" Type="nvarchar(max)" />
+          <Property Name="BankNo" Type="int" />
+        </EntityType>
+        <EntityType Name="DayPeriod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="MonthId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="FiscalPeriod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="FiscalDescription" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="MonthPeriod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="YrId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Payer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar(max)" />
+          <Property Name="Othername" Type="nvarchar(max)" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="SchId" Type="int" />
+          <Property Name="periodId" Type="bigint" />
+          <Property Name="RefNo" Type="nvarchar(max)" />
+          <Property Name="EmailAddress" Type="nvarchar(max)" />
+          <Property Name="PhoneNo" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentDescription" Type="nvarchar(max)" />
+          <Property Name="PaymentCode" Type="nvarchar(max)" />
+          <Property Name="TotalAmount" Type="real" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="SchId" Type="int" />
+          <Property Name="PayEngineId" Type="int" />
+          <Property Name="ReqId" Type="int" />
+          <Property Name="PeriodId" Type="bigint" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="PaymentEngine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentDescription" Type="nvarchar(max)" />
+          <Property Name="MacKey" Type="nvarchar(max)" />
+          <Property Name="PaymentId" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductId" Type="nvarchar" MaxLength="50" />
+          <Property Name="Currency" Type="nvarchar" MaxLength="50" />
+          <Property Name="PaymentUpdateURL" Type="nvarchar(max)" />
+          <Property Name="PaymentURL" Type="nvarchar(max)" />
+          <Property Name="SchId" Type="int" />
+          <Property Name="DateCreated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PaymentInvoice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PayerId" Type="bigint" />
+          <Property Name="PayId" Type="int" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="InvoiceNo" Type="nvarchar(max)" />
+          <Property Name="IsPosted" Type="bit" />
+          <Property Name="DatePosted" Type="datetime" />
+          <Property Name="PostedBy" Type="nvarchar(max)" />
+          <Property Name="RevenueCode" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Period">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="TimeStamp" Type="datetime" />
+        </EntityType>
+        <EntityType Name="School">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SchoolName" Type="nvarchar(max)" />
+          <Property Name="SchoolCode" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="SplitPayment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Amount" Type="real" />
+          <Property Name="PayId" Type="int" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="AccId" Type="int" />
+        </EntityType>
+        <EntityType Name="TransactionLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="InvoiceId" Type="bigint" />
+          <Property Name="IsVisibletoAdmin" Type="bit" />
+          <Property Name="IsVisibleToUser" Type="bit" />
+          <Property Name="PeriodId" Type="bigint" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="TransactionAmount" Type="nvarchar(max)" />
+          <Property Name="ResponseCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="ResponseDescription" Type="nvarchar(max)" />
+          <Property Name="UpdateEntry" Type="datetime" />
+          <Property Name="IsPosted" Type="bit" />
+          <Property Name="DatePosted" Type="datetime" />
+          <Property Name="PostedBy" Type="nvarchar(max)" />
+          <Property Name="TransactionRefNo" Type="nvarchar(max)" />
+          <Property Name="MerchantRef" Type="nvarchar(max)" />
+          <Property Name="BankRef" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_AccountDetails_Bank">
+          <End Role="Bank" Type="Self.Bank" Multiplicity="0..1" />
+          <End Role="AccountDetails" Type="Self.AccountDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountDetails">
+              <PropertyRef Name="BkId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DayPeriod_MonthPeriod">
+          <End Role="MonthPeriod" Type="Self.MonthPeriod" Multiplicity="0..1" />
+          <End Role="DayPeriod" Type="Self.DayPeriod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonthPeriod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DayPeriod">
+              <PropertyRef Name="MonthId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DayPeriod_Period">
+          <End Role="Period" Type="Self.Period" Multiplicity="1" />
+          <End Role="DayPeriod" Type="Self.DayPeriod" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Period">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DayPeriod">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FiscalPeriod_Period">
+          <End Role="Period" Type="Self.Period" Multiplicity="1" />
+          <End Role="FiscalPeriod" Type="Self.FiscalPeriod" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Period">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FiscalPeriod">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MonthPeriod_FiscalPeriod">
+          <End Role="FiscalPeriod" Type="Self.FiscalPeriod" Multiplicity="0..1" />
+          <End Role="MonthPeriod" Type="Self.MonthPeriod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FiscalPeriod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MonthPeriod">
+              <PropertyRef Name="YrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MonthPeriod_Period">
+          <End Role="Period" Type="Self.Period" Multiplicity="1" />
+          <End Role="MonthPeriod" Type="Self.MonthPeriod" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Period">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MonthPeriod">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payer_FiscalPeriod">
+          <End Role="FiscalPeriod" Type="Self.FiscalPeriod" Multiplicity="0..1" />
+          <End Role="Payer" Type="Self.Payer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FiscalPeriod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payer">
+              <PropertyRef Name="periodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payer_School">
+          <End Role="School" Type="Self.School" Multiplicity="0..1" />
+          <End Role="Payer" Type="Self.Payer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payer">
+              <PropertyRef Name="SchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_Payment">
+          <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
+          <End Role="Payment1" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment1">
+              <PropertyRef Name="ReqId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_PaymentEngine">
+          <End Role="PaymentEngine" Type="Self.PaymentEngine" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentEngine">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="PayEngineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_Period">
+          <End Role="Period" Type="Self.Period" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Period">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="PeriodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_School">
+          <End Role="School" Type="Self.School" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="SchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentEngine_School">
+          <End Role="School" Type="Self.School" Multiplicity="0..1" />
+          <End Role="PaymentEngine" Type="Self.PaymentEngine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentEngine">
+              <PropertyRef Name="SchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentInvoice_Payer">
+          <End Role="Payer" Type="Self.Payer" Multiplicity="0..1" />
+          <End Role="PaymentInvoice" Type="Self.PaymentInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentInvoice">
+              <PropertyRef Name="PayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentInvoice_Payment">
+          <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
+          <End Role="PaymentInvoice" Type="Self.PaymentInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentInvoice">
+              <PropertyRef Name="PayId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SplitPayment_AccountDetails">
+          <End Role="AccountDetails" Type="Self.AccountDetails" Multiplicity="0..1" />
+          <End Role="SplitPayment" Type="Self.SplitPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SplitPayment">
+              <PropertyRef Name="AccId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SplitPayment_Payment">
+          <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
+          <End Role="SplitPayment" Type="Self.SplitPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SplitPayment">
+              <PropertyRef Name="PayId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionLog_DayPeriod">
+          <End Role="DayPeriod" Type="Self.DayPeriod" Multiplicity="0..1" />
+          <End Role="TransactionLog" Type="Self.TransactionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DayPeriod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TransactionLog">
+              <PropertyRef Name="PeriodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionLog_PaymentInvoice">
+          <End Role="PaymentInvoice" Type="Self.PaymentInvoice" Multiplicity="0..1" />
+          <End Role="TransactionLog" Type="Self.TransactionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentInvoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TransactionLog">
+              <PropertyRef Name="InvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Payment_DEVModelStoreContainer">
+          <EntitySet Name="AccountDetails" EntityType="Self.AccountDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bank" EntityType="Self.Bank" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DayPeriod" EntityType="Self.DayPeriod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FiscalPeriod" EntityType="Self.FiscalPeriod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MonthPeriod" EntityType="Self.MonthPeriod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payer" EntityType="Self.Payer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentEngine" EntityType="Self.PaymentEngine" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentInvoice" EntityType="Self.PaymentInvoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Period" EntityType="Self.Period" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="School" EntityType="Self.School" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SplitPayment" EntityType="Self.SplitPayment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransactionLog" EntityType="Self.TransactionLog" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AccountDetails_Bank" Association="Self.FK_AccountDetails_Bank">
+            <End Role="Bank" EntitySet="Bank" />
+            <End Role="AccountDetails" EntitySet="AccountDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DayPeriod_MonthPeriod" Association="Self.FK_DayPeriod_MonthPeriod">
+            <End Role="MonthPeriod" EntitySet="MonthPeriod" />
+            <End Role="DayPeriod" EntitySet="DayPeriod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DayPeriod_Period" Association="Self.FK_DayPeriod_Period">
+            <End Role="Period" EntitySet="Period" />
+            <End Role="DayPeriod" EntitySet="DayPeriod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FiscalPeriod_Period" Association="Self.FK_FiscalPeriod_Period">
+            <End Role="Period" EntitySet="Period" />
+            <End Role="FiscalPeriod" EntitySet="FiscalPeriod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MonthPeriod_FiscalPeriod" Association="Self.FK_MonthPeriod_FiscalPeriod">
+            <End Role="FiscalPeriod" EntitySet="FiscalPeriod" />
+            <End Role="MonthPeriod" EntitySet="MonthPeriod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MonthPeriod_Period" Association="Self.FK_MonthPeriod_Period">
+            <End Role="Period" EntitySet="Period" />
+            <End Role="MonthPeriod" EntitySet="MonthPeriod" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payer_FiscalPeriod" Association="Self.FK_Payer_FiscalPeriod">
+            <End Role="FiscalPeriod" EntitySet="FiscalPeriod" />
+            <End Role="Payer" EntitySet="Payer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payer_School" Association="Self.FK_Payer_School">
+            <End Role="School" EntitySet="School" />
+            <End Role="Payer" EntitySet="Payer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_Payment" Association="Self.FK_Payment_Payment">
+            <End Role="Payment" EntitySet="Payment" />
+            <End Role="Payment1" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_PaymentEngine" Association="Self.FK_Payment_PaymentEngine">
+            <End Role="PaymentEngine" EntitySet="PaymentEngine" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_Period" Association="Self.FK_Payment_Period">
+            <End Role="Period" EntitySet="Period" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_School" Association="Self.FK_Payment_School">
+            <End Role="School" EntitySet="School" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentEngine_School" Association="Self.FK_PaymentEngine_School">
+            <End Role="School" EntitySet="School" />
+            <End Role="PaymentEngine" EntitySet="PaymentEngine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentInvoice_Payer" Association="Self.FK_PaymentInvoice_Payer">
+            <End Role="Payer" EntitySet="Payer" />
+            <End Role="PaymentInvoice" EntitySet="PaymentInvoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentInvoice_Payment" Association="Self.FK_PaymentInvoice_Payment">
+            <End Role="Payment" EntitySet="Payment" />
+            <End Role="PaymentInvoice" EntitySet="PaymentInvoice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SplitPayment_AccountDetails" Association="Self.FK_SplitPayment_AccountDetails">
+            <End Role="AccountDetails" EntitySet="AccountDetails" />
+            <End Role="SplitPayment" EntitySet="SplitPayment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SplitPayment_Payment" Association="Self.FK_SplitPayment_Payment">
+            <End Role="Payment" EntitySet="Payment" />
+            <End Role="SplitPayment" EntitySet="SplitPayment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionLog_DayPeriod" Association="Self.FK_TransactionLog_DayPeriod">
+            <End Role="DayPeriod" EntitySet="DayPeriod" />
+            <End Role="TransactionLog" EntitySet="TransactionLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionLog_PaymentInvoice" Association="Self.FK_TransactionLog_PaymentInvoice">
+            <End Role="PaymentInvoice" EntitySet="PaymentInvoice" />
+            <End Role="TransactionLog" EntitySet="TransactionLog" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Payment_DEVModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AccountDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AccountName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AccountType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BkId" Type="Int32" />
+          <NavigationProperty Name="Bank" Relationship="Self.FK_AccountDetails_Bank" FromRole="AccountDetails" ToRole="Bank" />
+          <NavigationProperty Name="SplitPayments" Relationship="Self.FK_SplitPayment_AccountDetails" FromRole="AccountDetails" ToRole="SplitPayment" />
+        </EntityType>
+        <EntityType Name="Bank">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BankName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Acronyms" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BankNo" Type="Int32" />
+          <NavigationProperty Name="AccountDetails" Relationship="Self.FK_AccountDetails_Bank" FromRole="Bank" ToRole="AccountDetails" />
+        </EntityType>
+        <EntityType Name="DayPeriod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="MonthId" Type="Int64" />
+          <NavigationProperty Name="MonthPeriod" Relationship="Self.FK_DayPeriod_MonthPeriod" FromRole="DayPeriod" ToRole="MonthPeriod" />
+          <NavigationProperty Name="Period" Relationship="Self.FK_DayPeriod_Period" FromRole="DayPeriod" ToRole="Period" />
+          <NavigationProperty Name="TransactionLogs" Relationship="Self.FK_TransactionLog_DayPeriod" FromRole="DayPeriod" ToRole="TransactionLog" />
+        </EntityType>
+        <EntityType Name="FiscalPeriod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="FiscalDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Period" Relationship="Self.FK_FiscalPeriod_Period" FromRole="FiscalPeriod" ToRole="Period" />
+          <NavigationProperty Name="MonthPeriods" Relationship="Self.FK_MonthPeriod_FiscalPeriod" FromRole="FiscalPeriod" ToRole="MonthPeriod" />
+          <NavigationProperty Name="Payers" Relationship="Self.FK_Payer_FiscalPeriod" FromRole="FiscalPeriod" ToRole="Payer" />
+        </EntityType>
+        <EntityType Name="MonthPeriod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="YrId" Type="Int64" />
+          <NavigationProperty Name="DayPeriods" Relationship="Self.FK_DayPeriod_MonthPeriod" FromRole="MonthPeriod" ToRole="DayPeriod" />
+          <NavigationProperty Name="FiscalPeriod" Relationship="Self.FK_MonthPeriod_FiscalPeriod" FromRole="MonthPeriod" ToRole="FiscalPeriod" />
+          <NavigationProperty Name="Period" Relationship="Self.FK_MonthPeriod_Period" FromRole="MonthPeriod" ToRole="Period" />
+        </EntityType>
+        <EntityType Name="Payer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Othername" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="SchId" Type="Int32" />
+          <Property Name="periodId" Type="Int64" />
+          <Property Name="RefNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FiscalPeriod" Relationship="Self.FK_Payer_FiscalPeriod" FromRole="Payer" ToRole="FiscalPeriod" />
+          <NavigationProperty Name="School" Relationship="Self.FK_Payer_School" FromRole="Payer" ToRole="School" />
+          <NavigationProperty Name="PaymentInvoices" Relationship="Self.FK_PaymentInvoice_Payer" FromRole="Payer" ToRole="PaymentInvoice" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TotalAmount" Type="Single" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="SchId" Type="Int32" />
+          <Property Name="PayEngineId" Type="Int32" />
+          <Property Name="ReqId" Type="Int32" />
+          <Property Name="PeriodId" Type="Int64" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Payment1" Relationship="Self.FK_Payment_Payment" FromRole="Payment" ToRole="Payment1" />
+          <NavigationProperty Name="Payment2" Relationship="Self.FK_Payment_Payment" FromRole="Payment1" ToRole="Payment" />
+          <NavigationProperty Name="PaymentEngine" Relationship="Self.FK_Payment_PaymentEngine" FromRole="Payment" ToRole="PaymentEngine" />
+          <NavigationProperty Name="Period" Relationship="Self.FK_Payment_Period" FromRole="Payment" ToRole="Period" />
+          <NavigationProperty Name="School" Relationship="Self.FK_Payment_School" FromRole="Payment" ToRole="School" />
+          <NavigationProperty Name="PaymentInvoices" Relationship="Self.FK_PaymentInvoice_Payment" FromRole="Payment" ToRole="PaymentInvoice" />
+          <NavigationProperty Name="SplitPayments" Relationship="Self.FK_SplitPayment_Payment" FromRole="Payment" ToRole="SplitPayment" />
+        </EntityType>
+        <EntityType Name="PaymentEngine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MacKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Currency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentUpdateURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SchId" Type="Int32" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK_Payment_PaymentEngine" FromRole="PaymentEngine" ToRole="Payment" />
+          <NavigationProperty Name="School" Relationship="Self.FK_PaymentEngine_School" FromRole="PaymentEngine" ToRole="School" />
+        </EntityType>
+        <EntityType Name="PaymentInvoice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PayerId" Type="Int64" />
+          <Property Name="PayId" Type="Int32" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="InvoiceNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsPosted" Type="Boolean" />
+          <Property Name="DatePosted" Type="DateTime" Precision="3" />
+          <Property Name="PostedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RevenueCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Payer" Relationship="Self.FK_PaymentInvoice_Payer" FromRole="PaymentInvoice" ToRole="Payer" />
+          <NavigationProperty Name="Payment" Relationship="Self.FK_PaymentInvoice_Payment" FromRole="PaymentInvoice" ToRole="Payment" />
+          <NavigationProperty Name="TransactionLogs" Relationship="Self.FK_TransactionLog_PaymentInvoice" FromRole="PaymentInvoice" ToRole="TransactionLog" />
+        </EntityType>
+        <EntityType Name="Period">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="DayPeriod" Relationship="Self.FK_DayPeriod_Period" FromRole="Period" ToRole="DayPeriod" />
+          <NavigationProperty Name="FiscalPeriod" Relationship="Self.FK_FiscalPeriod_Period" FromRole="Period" ToRole="FiscalPeriod" />
+          <NavigationProperty Name="MonthPeriod" Relationship="Self.FK_MonthPeriod_Period" FromRole="Period" ToRole="MonthPeriod" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK_Payment_Period" FromRole="Period" ToRole="Payment" />
+        </EntityType>
+        <EntityType Name="School">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SchoolName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SchoolCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Payers" Relationship="Self.FK_Payer_School" FromRole="School" ToRole="Payer" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK_Payment_School" FromRole="School" ToRole="Payment" />
+          <NavigationProperty Name="PaymentEngines" Relationship="Self.FK_PaymentEngine_School" FromRole="School" ToRole="PaymentEngine" />
+        </EntityType>
+        <EntityType Name="SplitPayment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Single" />
+          <Property Name="PayId" Type="Int32" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="AccId" Type="Int32" />
+          <NavigationProperty Name="AccountDetail" Relationship="Self.FK_SplitPayment_AccountDetails" FromRole="SplitPayment" ToRole="AccountDetails" />
+          <NavigationProperty Name="Payment" Relationship="Self.FK_SplitPayment_Payment" FromRole="SplitPayment" ToRole="Payment" />
+        </EntityType>
+        <EntityType Name="TransactionLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceId" Type="Int64" />
+          <Property Name="IsVisibletoAdmin" Type="Boolean" />
+          <Property Name="IsVisibleToUser" Type="Boolean" />
+          <Property Name="PeriodId" Type="Int64" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="TransactionAmount" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ResponseCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ResponseDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateEntry" Type="DateTime" Precision="3" />
+          <Property Name="IsPosted" Type="Boolean" />
+          <Property Name="DatePosted" Type="DateTime" Precision="3" />
+          <Property Name="PostedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TransactionRefNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MerchantRef" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BankRef" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DayPeriod" Relationship="Self.FK_TransactionLog_DayPeriod" FromRole="TransactionLog" ToRole="DayPeriod" />
+          <NavigationProperty Name="PaymentInvoice" Relationship="Self.FK_TransactionLog_PaymentInvoice" FromRole="TransactionLog" ToRole="PaymentInvoice" />
+        </EntityType>
+        <Association Name="FK_AccountDetails_Bank">
+          <End Role="Bank" Type="Self.Bank" Multiplicity="0..1" />
+          <End Role="AccountDetails" Type="Self.AccountDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bank">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AccountDetails">
+              <PropertyRef Name="BkId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SplitPayment_AccountDetails">
+          <End Role="AccountDetails" Type="Self.AccountDetail" Multiplicity="0..1" />
+          <End Role="SplitPayment" Type="Self.SplitPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AccountDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SplitPayment">
+              <PropertyRef Name="AccId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DayPeriod_MonthPeriod">
+          <End Role="MonthPeriod" Type="Self.MonthPeriod" Multiplicity="0..1" />
+          <End Role="DayPeriod" Type="Self.DayPeriod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonthPeriod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DayPeriod">
+              <PropertyRef Name="MonthId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DayPeriod_Period">
+          <End Role="Period" Type="Self.Period" Multiplicity="1" />
+          <End Role="DayPeriod" Type="Self.DayPeriod" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Period">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DayPeriod">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionLog_DayPeriod">
+          <End Role="DayPeriod" Type="Self.DayPeriod" Multiplicity="0..1" />
+          <End Role="TransactionLog" Type="Self.TransactionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DayPeriod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TransactionLog">
+              <PropertyRef Name="PeriodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FiscalPeriod_Period">
+          <End Role="Period" Type="Self.Period" Multiplicity="1" />
+          <End Role="FiscalPeriod" Type="Self.FiscalPeriod" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Period">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FiscalPeriod">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MonthPeriod_FiscalPeriod">
+          <End Role="FiscalPeriod" Type="Self.FiscalPeriod" Multiplicity="0..1" />
+          <End Role="MonthPeriod" Type="Self.MonthPeriod" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FiscalPeriod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MonthPeriod">
+              <PropertyRef Name="YrId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payer_FiscalPeriod">
+          <End Role="FiscalPeriod" Type="Self.FiscalPeriod" Multiplicity="0..1" />
+          <End Role="Payer" Type="Self.Payer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FiscalPeriod">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payer">
+              <PropertyRef Name="periodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MonthPeriod_Period">
+          <End Role="Period" Type="Self.Period" Multiplicity="1" />
+          <End Role="MonthPeriod" Type="Self.MonthPeriod" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Period">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MonthPeriod">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payer_School">
+          <End Role="School" Type="Self.School" Multiplicity="0..1" />
+          <End Role="Payer" Type="Self.Payer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payer">
+              <PropertyRef Name="SchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentInvoice_Payer">
+          <End Role="Payer" Type="Self.Payer" Multiplicity="0..1" />
+          <End Role="PaymentInvoice" Type="Self.PaymentInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentInvoice">
+              <PropertyRef Name="PayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_Payment">
+          <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
+          <End Role="Payment1" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment1">
+              <PropertyRef Name="ReqId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_PaymentEngine">
+          <End Role="PaymentEngine" Type="Self.PaymentEngine" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentEngine">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="PayEngineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_Period">
+          <End Role="Period" Type="Self.Period" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Period">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="PeriodId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_School">
+          <End Role="School" Type="Self.School" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="SchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentInvoice_Payment">
+          <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
+          <End Role="PaymentInvoice" Type="Self.PaymentInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentInvoice">
+              <PropertyRef Name="PayId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SplitPayment_Payment">
+          <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
+          <End Role="SplitPayment" Type="Self.SplitPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SplitPayment">
+              <PropertyRef Name="PayId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PaymentEngine_School">
+          <End Role="School" Type="Self.School" Multiplicity="0..1" />
+          <End Role="PaymentEngine" Type="Self.PaymentEngine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PaymentEngine">
+              <PropertyRef Name="SchId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionLog_PaymentInvoice">
+          <End Role="PaymentInvoice" Type="Self.PaymentInvoice" Multiplicity="0..1" />
+          <End Role="TransactionLog" Type="Self.TransactionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentInvoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TransactionLog">
+              <PropertyRef Name="InvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Payment_DEVEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AccountDetails" EntityType="Self.AccountDetail" />
+          <EntitySet Name="Banks" EntityType="Self.Bank" />
+          <EntitySet Name="DayPeriods" EntityType="Self.DayPeriod" />
+          <EntitySet Name="FiscalPeriods" EntityType="Self.FiscalPeriod" />
+          <EntitySet Name="MonthPeriods" EntityType="Self.MonthPeriod" />
+          <EntitySet Name="Payers" EntityType="Self.Payer" />
+          <EntitySet Name="Payments" EntityType="Self.Payment" />
+          <EntitySet Name="PaymentEngines" EntityType="Self.PaymentEngine" />
+          <EntitySet Name="PaymentInvoices" EntityType="Self.PaymentInvoice" />
+          <EntitySet Name="Periods" EntityType="Self.Period" />
+          <EntitySet Name="Schools" EntityType="Self.School" />
+          <EntitySet Name="SplitPayments" EntityType="Self.SplitPayment" />
+          <EntitySet Name="TransactionLogs" EntityType="Self.TransactionLog" />
+          <AssociationSet Name="FK_AccountDetails_Bank" Association="Self.FK_AccountDetails_Bank">
+            <End Role="Bank" EntitySet="Banks" />
+            <End Role="AccountDetails" EntitySet="AccountDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SplitPayment_AccountDetails" Association="Self.FK_SplitPayment_AccountDetails">
+            <End Role="AccountDetails" EntitySet="AccountDetails" />
+            <End Role="SplitPayment" EntitySet="SplitPayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DayPeriod_MonthPeriod" Association="Self.FK_DayPeriod_MonthPeriod">
+            <End Role="MonthPeriod" EntitySet="MonthPeriods" />
+            <End Role="DayPeriod" EntitySet="DayPeriods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DayPeriod_Period" Association="Self.FK_DayPeriod_Period">
+            <End Role="Period" EntitySet="Periods" />
+            <End Role="DayPeriod" EntitySet="DayPeriods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionLog_DayPeriod" Association="Self.FK_TransactionLog_DayPeriod">
+            <End Role="DayPeriod" EntitySet="DayPeriods" />
+            <End Role="TransactionLog" EntitySet="TransactionLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FiscalPeriod_Period" Association="Self.FK_FiscalPeriod_Period">
+            <End Role="Period" EntitySet="Periods" />
+            <End Role="FiscalPeriod" EntitySet="FiscalPeriods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MonthPeriod_FiscalPeriod" Association="Self.FK_MonthPeriod_FiscalPeriod">
+            <End Role="FiscalPeriod" EntitySet="FiscalPeriods" />
+            <End Role="MonthPeriod" EntitySet="MonthPeriods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payer_FiscalPeriod" Association="Self.FK_Payer_FiscalPeriod">
+            <End Role="FiscalPeriod" EntitySet="FiscalPeriods" />
+            <End Role="Payer" EntitySet="Payers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MonthPeriod_Period" Association="Self.FK_MonthPeriod_Period">
+            <End Role="Period" EntitySet="Periods" />
+            <End Role="MonthPeriod" EntitySet="MonthPeriods" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payer_School" Association="Self.FK_Payer_School">
+            <End Role="School" EntitySet="Schools" />
+            <End Role="Payer" EntitySet="Payers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentInvoice_Payer" Association="Self.FK_PaymentInvoice_Payer">
+            <End Role="Payer" EntitySet="Payers" />
+            <End Role="PaymentInvoice" EntitySet="PaymentInvoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_Payment" Association="Self.FK_Payment_Payment">
+            <End Role="Payment" EntitySet="Payments" />
+            <End Role="Payment1" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_PaymentEngine" Association="Self.FK_Payment_PaymentEngine">
+            <End Role="PaymentEngine" EntitySet="PaymentEngines" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_Period" Association="Self.FK_Payment_Period">
+            <End Role="Period" EntitySet="Periods" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_School" Association="Self.FK_Payment_School">
+            <End Role="School" EntitySet="Schools" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentInvoice_Payment" Association="Self.FK_PaymentInvoice_Payment">
+            <End Role="Payment" EntitySet="Payments" />
+            <End Role="PaymentInvoice" EntitySet="PaymentInvoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SplitPayment_Payment" Association="Self.FK_SplitPayment_Payment">
+            <End Role="Payment" EntitySet="Payments" />
+            <End Role="SplitPayment" EntitySet="SplitPayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PaymentEngine_School" Association="Self.FK_PaymentEngine_School">
+            <End Role="School" EntitySet="Schools" />
+            <End Role="PaymentEngine" EntitySet="PaymentEngines" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionLog_PaymentInvoice" Association="Self.FK_TransactionLog_PaymentInvoice">
+            <End Role="PaymentInvoice" EntitySet="PaymentInvoices" />
+            <End Role="TransactionLog" EntitySet="TransactionLogs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Payment_DEVModelStoreContainer" CdmEntityContainer="Payment_DEVEntities">
+          <EntitySetMapping Name="AccountDetails">
+            <EntityTypeMapping TypeName="Payment_DEVModel.AccountDetail">
+              <MappingFragment StoreEntitySet="AccountDetails">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccountNo" ColumnName="AccountNo" />
+                <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+                <ScalarProperty Name="AccountType" ColumnName="AccountType" />
+                <ScalarProperty Name="BkId" ColumnName="BkId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Banks">
+            <EntityTypeMapping TypeName="Payment_DEVModel.Bank">
+              <MappingFragment StoreEntitySet="Bank">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="Acronyms" ColumnName="Acronyms" />
+                <ScalarProperty Name="BankNo" ColumnName="BankNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DayPeriods">
+            <EntityTypeMapping TypeName="Payment_DEVModel.DayPeriod">
+              <MappingFragment StoreEntitySet="DayPeriod">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MonthId" ColumnName="MonthId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FiscalPeriods">
+            <EntityTypeMapping TypeName="Payment_DEVModel.FiscalPeriod">
+              <MappingFragment StoreEntitySet="FiscalPeriod">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FiscalDescription" ColumnName="FiscalDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MonthPeriods">
+            <EntityTypeMapping TypeName="Payment_DEVModel.MonthPeriod">
+              <MappingFragment StoreEntitySet="MonthPeriod">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="YrId" ColumnName="YrId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payers">
+            <EntityTypeMapping TypeName="Payment_DEVModel.Payer">
+              <MappingFragment StoreEntitySet="Payer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Othername" ColumnName="Othername" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="SchId" ColumnName="SchId" />
+                <ScalarProperty Name="periodId" ColumnName="periodId" />
+                <ScalarProperty Name="RefNo" ColumnName="RefNo" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="Payment_DEVModel.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PaymentDescription" ColumnName="PaymentDescription" />
+                <ScalarProperty Name="PaymentCode" ColumnName="PaymentCode" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="SchId" ColumnName="SchId" />
+                <ScalarProperty Name="PayEngineId" ColumnName="PayEngineId" />
+                <ScalarProperty Name="ReqId" ColumnName="ReqId" />
+                <ScalarProperty Name="PeriodId" ColumnName="PeriodId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentEngines">
+            <EntityTypeMapping TypeName="Payment_DEVModel.PaymentEngine">
+              <MappingFragment StoreEntitySet="PaymentEngine">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PaymentDescription" ColumnName="PaymentDescription" />
+                <ScalarProperty Name="MacKey" ColumnName="MacKey" />
+                <ScalarProperty Name="PaymentId" ColumnName="PaymentId" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="PaymentUpdateURL" ColumnName="PaymentUpdateURL" />
+                <ScalarProperty Name="PaymentURL" ColumnName="PaymentURL" />
+                <ScalarProperty Name="SchId" ColumnName="SchId" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentInvoices">
+            <EntityTypeMapping TypeName="Payment_DEVModel.PaymentInvoice">
+              <MappingFragment StoreEntitySet="PaymentInvoice">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PayerId" ColumnName="PayerId" />
+                <ScalarProperty Name="PayId" ColumnName="PayId" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="InvoiceNo" ColumnName="InvoiceNo" />
+                <ScalarProperty Name="IsPosted" ColumnName="IsPosted" />
+                <ScalarProperty Name="DatePosted" ColumnName="DatePosted" />
+                <ScalarProperty Name="PostedBy" ColumnName="PostedBy" />
+                <ScalarProperty Name="RevenueCode" ColumnName="RevenueCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Periods">
+            <EntityTypeMapping TypeName="Payment_DEVModel.Period">
+              <MappingFragment StoreEntitySet="Period">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schools">
+            <EntityTypeMapping TypeName="Payment_DEVModel.School">
+              <MappingFragment StoreEntitySet="School">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+                <ScalarProperty Name="SchoolCode" ColumnName="SchoolCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SplitPayments">
+            <EntityTypeMapping TypeName="Payment_DEVModel.SplitPayment">
+              <MappingFragment StoreEntitySet="SplitPayment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PayId" ColumnName="PayId" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="AccId" ColumnName="AccId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransactionLogs">
+            <EntityTypeMapping TypeName="Payment_DEVModel.TransactionLog">
+              <MappingFragment StoreEntitySet="TransactionLog">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+                <ScalarProperty Name="IsVisibletoAdmin" ColumnName="IsVisibletoAdmin" />
+                <ScalarProperty Name="IsVisibleToUser" ColumnName="IsVisibleToUser" />
+                <ScalarProperty Name="PeriodId" ColumnName="PeriodId" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="TransactionAmount" ColumnName="TransactionAmount" />
+                <ScalarProperty Name="ResponseCode" ColumnName="ResponseCode" />
+                <ScalarProperty Name="ResponseDescription" ColumnName="ResponseDescription" />
+                <ScalarProperty Name="UpdateEntry" ColumnName="UpdateEntry" />
+                <ScalarProperty Name="IsPosted" ColumnName="IsPosted" />
+                <ScalarProperty Name="DatePosted" ColumnName="DatePosted" />
+                <ScalarProperty Name="PostedBy" ColumnName="PostedBy" />
+                <ScalarProperty Name="TransactionRefNo" ColumnName="TransactionRefNo" />
+                <ScalarProperty Name="MerchantRef" ColumnName="MerchantRef" />
+                <ScalarProperty Name="BankRef" ColumnName="BankRef" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
