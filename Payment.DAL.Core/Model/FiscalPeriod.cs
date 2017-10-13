@@ -12,7 +12,7 @@ namespace Payment.DAL.Core.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class FiscalPeriod
+    public partial class FiscalPeriod : Period
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public FiscalPeriod()
@@ -21,10 +21,8 @@ namespace Payment.DAL.Core.Model
             this.Payers = new HashSet<Payer>();
         }
     
-        public long Id { get; set; }
         public string FiscalDescription { get; set; }
     
-        public virtual Period Period { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MonthPeriod> MonthPeriods { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

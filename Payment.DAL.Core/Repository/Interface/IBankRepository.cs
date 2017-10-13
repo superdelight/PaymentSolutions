@@ -11,5 +11,6 @@ namespace Payment.DAL.Core.Repository.Interface
     {
         bool ConfirmBank(string bankName, string bankCode);
         Bank GetBank(string bankName, string bankCode);
+        Bank GetBankById(string Id);
     }
 }

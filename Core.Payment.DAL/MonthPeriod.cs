@@ -12,7 +12,7 @@ namespace Core.Payment.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class MonthPeriod
+    public partial class MonthPeriod : Period
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public MonthPeriod()
@@ -20,12 +20,10 @@ namespace Core.Payment.DAL
             this.DayPeriods = new HashSet<DayPeriod>();
         }
     
-        public long Id { get; set; }
         public Nullable<long> YrId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DayPeriod> DayPeriods { get; set; }
         public virtual FiscalPeriod FiscalPeriod { get; set; }
-        public virtual Period Period { get; set; }
     }
 }

@@ -64,6 +64,7 @@
     <Compile Include="Implementation\AdminManager.cs" />
     <Compile Include="Interface\IAdminManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\BusinessMessage.cs" />
     <Compile Include="Utility\ServiceRegistry.cs" />
   </ItemGroup>
   <ItemGroup />

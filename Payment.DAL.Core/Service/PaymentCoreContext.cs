@@ -30,9 +30,10 @@ namespace Payment.DAL.Core.Service
         {
             try
             {
-                return _context.SaveChanges();
+                var rsp= _context.SaveChanges();
+                return rsp;
             }
-            catch
+            catch(Exception ex)
             {
                 return -1;
             }

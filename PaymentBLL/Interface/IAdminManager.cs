@@ -1,4 +1,5 @@
 ﻿using Payment.DAL.Core.Model;
+using PaymentBLL.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,13 @@ namespace PaymentBLL.Interface
 {
     public interface IAdminManager
     {
-        bool CreateSchool(string schoolName, string schoolCode);
-        School GetSchoolByCode(string schoolCode);
+        BusinessMessage<bool> CreateNewBank(string bankName, string bankCode, string bankId);
+        BusinessMessage<bool> CreateSchool(string schoolName, string schoolCode);
+        BusinessMessage<School> GetSchoolByCode(string schoolCode);
 
-        bool CreateNewBank(Bank bank);
-        Bank GetBankByName(string bankName);
-        Bank GetBankByCode(string bankCode);
+        BusinessMessage<List<Bank>> GetAllBanks();
+        BusinessMessage<Bank> GetBankByName(string bankName);
+        BusinessMessage<Bank> GetBankByCode(string bankCode);
+        BusinessMessage<Bank> GetBankById(string Id);
     }
 }

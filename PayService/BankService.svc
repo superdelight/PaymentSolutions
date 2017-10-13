@@ -1,0 +1,3 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="PayService.Implementation.Implementation.BankService"  Factory="PayService.WcfServiceFactory" %>
+
+

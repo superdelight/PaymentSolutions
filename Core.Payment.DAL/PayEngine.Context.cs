@@ -27,9 +27,6 @@ namespace Core.Payment.DAL
     
         public virtual DbSet<AccountDetail> AccountDetails { get; set; }
         public virtual DbSet<Bank> Banks { get; set; }
-        public virtual DbSet<DayPeriod> DayPeriods { get; set; }
-        public virtual DbSet<FiscalPeriod> FiscalPeriods { get; set; }
-        public virtual DbSet<MonthPeriod> MonthPeriods { get; set; }
         public virtual DbSet<Payer> Payers { get; set; }
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<PaymentEngine> PaymentEngines { get; set; }

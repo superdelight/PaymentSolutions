@@ -15,62 +15,125 @@ namespace PaymentBLL.Implementation
     public class AdminManager : IAdminManager
     {
 
-        PaymentCoreContext context = new PaymentCoreContext();
-        public bool CreateNewBank(Bank bank)
+        IPaymentCoreContext context;
+        public AdminManager(PaymentCoreContext context)
         {
-            if (!context.BankDAL.ConfirmBank(bank.BankName, bank.Acronyms))
+            this.context = context;
+        }
+        public BusinessMessage<bool> CreateNewBank(string bankName, string bankCode, string bankId)
+        {
+            Bank bank = new Bank
             {
-                context.BankDAL.Add(bank);
-                if(context.SaveChanges()>0)
+                BankName = bankName,
+                BankNo = int.Parse(bankId),
+                Acronyms = bankCode
+            };
+            BusinessMessage<bool> response = new BusinessMessage<bool>();
+            try
+            {
+                if (!context.BankDAL.ConfirmBank(bank.BankName, bank.Acronyms))
                 {
-                    return true;
+                    context.BankDAL.Add(bank);
+                    if (context.SaveChanges() > 0)
+                    {
+                        response.Response = ResponseCode.OK;
+                        response.Message = string.Format("{0} has been successfully created", bank.BankName);
+                        response.Result = true;
+                    }
+                    else
+                    {
+                        response.Response = ResponseCode.Error;
+                        response.Message = string.Format("The system was unable to complete the operation");
+                        response.Result = false;
+                    }
                 }
                 else
                 {
-                    return false;
+                    response.Response = ResponseCode.Error;
+                    response.Message = string.Format("Duplicate entry is not allowed ");
+                    response.Result = false;
                 }
             }
-            else
+            catch(Exception ex)
             {
-                return false;
+                response.Response = ResponseCode.ServerException;
+                response.Message = ex.Message;
+                response.Result = false;
             }
+            return response;
         }
-        public bool CreateSchool(string schoolName, string schoolCode)
+        public BusinessMessage<bool> CreateSchool(string schoolName, string schoolCode)
         {
-            if (!context.SchoolDAL.ConfirmSchool(schoolName, schoolCode))
+            BusinessMessage<bool> response = new BusinessMessage<bool>();
+            try
             {
-                School sch = new School();
-                sch.SchoolName = schoolName;
-                sch.SchoolCode = schoolCode;
-                context.SchoolDAL.Add(sch);
-                if (context.SaveChanges() > 0)
+                if (!context.SchoolDAL.ConfirmSchool(schoolName, schoolCode))
                 {
-                    return true;
+                    School sch = new School();
+                    sch.SchoolName = schoolName;
+                    sch.SchoolCode = schoolCode;
+                    context.SchoolDAL.Add(sch);
+                    if (context.SaveChanges() > 0)
+                    {
+                        response.Response = ResponseCode.OK;
+                        response.Message = string.Format("{0} has been successfully created", schoolName);
+                        response.Result = true;
+                    }
+                    else
+                    {
+                        response.Response = ResponseCode.Error;
+                        response.Message = string.Format("The system was unable to complete the operation");
+                        response.Result = false;
+                    }
                 }
                 else
                 {
-                    return false;
+                    response.Response = ResponseCode.Error;
+                    response.Message = string.Format("Duplicate entry is not allowed ");
+                    response.Result = false;
                 }
             }
-            else
+            catch(Exception ex)
             {
-                return false;
+                response.Response = ResponseCode.ServerException;
+                response.Message = ex.Message;
+                response.Result = false;
             }
+            return response;
         }
 
-        public Bank GetBankByCode(string bankCode)
+        public BusinessMessage<Bank> GetBankByCode(string bankCode)
         {
-            return context.BankDAL.GetBank(null, bankCode);
+            BusinessMessage<Bank> response = new BusinessMessage<Bank>();
+            response.Result= context.BankDAL.GetBank(null, bankCode);
+            return response;
         }
 
-        public Bank GetBankByName(string bankName)
+        public BusinessMessage<Bank> GetBankByName(string bankName)
         {
-            return context.BankDAL.GetBank(bankName,null);
+            BusinessMessage<Bank> response = new BusinessMessage<Bank>();
+            response.Result = context.BankDAL.GetBank(bankName,null);
+            return response;
+        }
+        public BusinessMessage<List<Bank>> GetAllBanks()
+        {
+            BusinessMessage<List<Bank>> response = new BusinessMessage<List<Bank>>();
+            response.Result = context.BankDAL.GetAll().ToList();
+            return response;
         }
 
-        public School GetSchoolByCode(string schoolCode)
+        public BusinessMessage<School> GetSchoolByCode(string schoolCode)
         {
-            return context.SchoolDAL.GetSchool(null,schoolCode);
+            BusinessMessage<School> response = new BusinessMessage<School>();
+            response.Result= context.SchoolDAL.GetSchool(null,schoolCode);
+            return response;
+        }
+
+        public BusinessMessage<Bank> GetBankById(string Id)
+        {
+            BusinessMessage<Bank> response = new BusinessMessage<Bank>();
+            response.Result = context.BankDAL.GetBankById(Id);
+            return response;
         }
     }
 }

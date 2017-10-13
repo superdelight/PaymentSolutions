@@ -498,35 +498,20 @@
           <Property Name="BankNo" Type="Int32" />
           <NavigationProperty Name="AccountDetails" Relationship="Self.FK_AccountDetails_Bank" FromRole="Bank" ToRole="AccountDetails" />
         </EntityType>
-        <EntityType Name="DayPeriod">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" />
+        <EntityType Name="DayPeriod" BaseType="Payment_DEVModel.Period">
           <Property Name="MonthId" Type="Int64" />
           <NavigationProperty Name="MonthPeriod" Relationship="Self.FK_DayPeriod_MonthPeriod" FromRole="DayPeriod" ToRole="MonthPeriod" />
-          <NavigationProperty Name="Period" Relationship="Self.FK_DayPeriod_Period" FromRole="DayPeriod" ToRole="Period" />
           <NavigationProperty Name="TransactionLogs" Relationship="Self.FK_TransactionLog_DayPeriod" FromRole="DayPeriod" ToRole="TransactionLog" />
         </EntityType>
-        <EntityType Name="FiscalPeriod">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" />
+        <EntityType Name="FiscalPeriod" BaseType="Payment_DEVModel.Period">
           <Property Name="FiscalDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Period" Relationship="Self.FK_FiscalPeriod_Period" FromRole="FiscalPeriod" ToRole="Period" />
           <NavigationProperty Name="MonthPeriods" Relationship="Self.FK_MonthPeriod_FiscalPeriod" FromRole="FiscalPeriod" ToRole="MonthPeriod" />
           <NavigationProperty Name="Payers" Relationship="Self.FK_Payer_FiscalPeriod" FromRole="FiscalPeriod" ToRole="Payer" />
         </EntityType>
-        <EntityType Name="MonthPeriod">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" />
+        <EntityType Name="MonthPeriod" BaseType="Payment_DEVModel.Period">
           <Property Name="YrId" Type="Int64" />
           <NavigationProperty Name="DayPeriods" Relationship="Self.FK_DayPeriod_MonthPeriod" FromRole="MonthPeriod" ToRole="DayPeriod" />
           <NavigationProperty Name="FiscalPeriod" Relationship="Self.FK_MonthPeriod_FiscalPeriod" FromRole="MonthPeriod" ToRole="FiscalPeriod" />
-          <NavigationProperty Name="Period" Relationship="Self.FK_MonthPeriod_Period" FromRole="MonthPeriod" ToRole="Period" />
         </EntityType>
         <EntityType Name="Payer">
           <Key>
@@ -601,16 +586,13 @@
           <NavigationProperty Name="Payment" Relationship="Self.FK_PaymentInvoice_Payment" FromRole="PaymentInvoice" ToRole="Payment" />
           <NavigationProperty Name="TransactionLogs" Relationship="Self.FK_TransactionLog_PaymentInvoice" FromRole="PaymentInvoice" ToRole="TransactionLog" />
         </EntityType>
-        <EntityType Name="Period">
+        <EntityType Name="Period" Abstract="true">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="TimeStamp" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="DayPeriod" Relationship="Self.FK_DayPeriod_Period" FromRole="Period" ToRole="DayPeriod" />
-          <NavigationProperty Name="FiscalPeriod" Relationship="Self.FK_FiscalPeriod_Period" FromRole="Period" ToRole="FiscalPeriod" />
-          <NavigationProperty Name="MonthPeriod" Relationship="Self.FK_MonthPeriod_Period" FromRole="Period" ToRole="MonthPeriod" />
           <NavigationProperty Name="Payments" Relationship="Self.FK_Payment_Period" FromRole="Period" ToRole="Payment" />
         </EntityType>
         <EntityType Name="School">
@@ -697,18 +679,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DayPeriod_Period">
-          <End Role="Period" Type="Self.Period" Multiplicity="1" />
-          <End Role="DayPeriod" Type="Self.DayPeriod" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Period">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DayPeriod">
-              <PropertyRef Name="Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TransactionLog_DayPeriod">
           <End Role="DayPeriod" Type="Self.DayPeriod" Multiplicity="0..1" />
           <End Role="TransactionLog" Type="Self.TransactionLog" Multiplicity="*" />
@@ -718,18 +688,6 @@
             </Principal>
             <Dependent Role="TransactionLog">
               <PropertyRef Name="PeriodId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FiscalPeriod_Period">
-          <End Role="Period" Type="Self.Period" Multiplicity="1" />
-          <End Role="FiscalPeriod" Type="Self.FiscalPeriod" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Period">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="FiscalPeriod">
-              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -754,18 +712,6 @@
             </Principal>
             <Dependent Role="Payer">
               <PropertyRef Name="periodId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MonthPeriod_Period">
-          <End Role="Period" Type="Self.Period" Multiplicity="1" />
-          <End Role="MonthPeriod" Type="Self.MonthPeriod" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Period">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="MonthPeriod">
-              <PropertyRef Name="Id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -892,9 +838,6 @@
         <EntityContainer Name="Payment_DEVEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AccountDetails" EntityType="Self.AccountDetail" />
           <EntitySet Name="Banks" EntityType="Self.Bank" />
-          <EntitySet Name="DayPeriods" EntityType="Self.DayPeriod" />
-          <EntitySet Name="FiscalPeriods" EntityType="Self.FiscalPeriod" />
-          <EntitySet Name="MonthPeriods" EntityType="Self.MonthPeriod" />
           <EntitySet Name="Payers" EntityType="Self.Payer" />
           <EntitySet Name="Payments" EntityType="Self.Payment" />
           <EntitySet Name="PaymentEngines" EntityType="Self.PaymentEngine" />
@@ -912,32 +855,20 @@
             <End Role="SplitPayment" EntitySet="SplitPayments" />
           </AssociationSet>
           <AssociationSet Name="FK_DayPeriod_MonthPeriod" Association="Self.FK_DayPeriod_MonthPeriod">
-            <End Role="MonthPeriod" EntitySet="MonthPeriods" />
-            <End Role="DayPeriod" EntitySet="DayPeriods" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DayPeriod_Period" Association="Self.FK_DayPeriod_Period">
-            <End Role="Period" EntitySet="Periods" />
-            <End Role="DayPeriod" EntitySet="DayPeriods" />
+            <End Role="MonthPeriod" EntitySet="Periods" />
+            <End Role="DayPeriod" EntitySet="Periods" />
           </AssociationSet>
           <AssociationSet Name="FK_TransactionLog_DayPeriod" Association="Self.FK_TransactionLog_DayPeriod">
-            <End Role="DayPeriod" EntitySet="DayPeriods" />
+            <End Role="DayPeriod" EntitySet="Periods" />
             <End Role="TransactionLog" EntitySet="TransactionLogs" />
           </AssociationSet>
-          <AssociationSet Name="FK_FiscalPeriod_Period" Association="Self.FK_FiscalPeriod_Period">
-            <End Role="Period" EntitySet="Periods" />
-            <End Role="FiscalPeriod" EntitySet="FiscalPeriods" />
-          </AssociationSet>
           <AssociationSet Name="FK_MonthPeriod_FiscalPeriod" Association="Self.FK_MonthPeriod_FiscalPeriod">
-            <End Role="FiscalPeriod" EntitySet="FiscalPeriods" />
-            <End Role="MonthPeriod" EntitySet="MonthPeriods" />
+            <End Role="FiscalPeriod" EntitySet="Periods" />
+            <End Role="MonthPeriod" EntitySet="Periods" />
           </AssociationSet>
           <AssociationSet Name="FK_Payer_FiscalPeriod" Association="Self.FK_Payer_FiscalPeriod">
-            <End Role="FiscalPeriod" EntitySet="FiscalPeriods" />
+            <End Role="FiscalPeriod" EntitySet="Periods" />
             <End Role="Payer" EntitySet="Payers" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MonthPeriod_Period" Association="Self.FK_MonthPeriod_Period">
-            <End Role="Period" EntitySet="Periods" />
-            <End Role="MonthPeriod" EntitySet="MonthPeriods" />
           </AssociationSet>
           <AssociationSet Name="FK_Payer_School" Association="Self.FK_Payer_School">
             <End Role="School" EntitySet="Schools" />
@@ -1007,30 +938,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DayPeriods">
-            <EntityTypeMapping TypeName="Payment_DEVModel.DayPeriod">
-              <MappingFragment StoreEntitySet="DayPeriod">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="MonthId" ColumnName="MonthId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FiscalPeriods">
-            <EntityTypeMapping TypeName="Payment_DEVModel.FiscalPeriod">
-              <MappingFragment StoreEntitySet="FiscalPeriod">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FiscalDescription" ColumnName="FiscalDescription" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MonthPeriods">
-            <EntityTypeMapping TypeName="Payment_DEVModel.MonthPeriod">
-              <MappingFragment StoreEntitySet="MonthPeriod">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="YrId" ColumnName="YrId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Payers">
             <EntityTypeMapping TypeName="Payment_DEVModel.Payer">
               <MappingFragment StoreEntitySet="Payer">
@@ -1094,11 +1001,29 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Periods">
-            <EntityTypeMapping TypeName="Payment_DEVModel.Period">
+            <EntityTypeMapping TypeName="IsTypeOf(Payment_DEVModel.Period)">
               <MappingFragment StoreEntitySet="Period">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(Payment_DEVModel.DayPeriod)">
+              <MappingFragment StoreEntitySet="DayPeriod">
+                <ScalarProperty Name="MonthId" ColumnName="MonthId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(Payment_DEVModel.MonthPeriod)">
+              <MappingFragment StoreEntitySet="MonthPeriod">
+                <ScalarProperty Name="YrId" ColumnName="YrId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(Payment_DEVModel.FiscalPeriod)">
+              <MappingFragment StoreEntitySet="FiscalPeriod">
+                <ScalarProperty Name="FiscalDescription" ColumnName="FiscalDescription" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

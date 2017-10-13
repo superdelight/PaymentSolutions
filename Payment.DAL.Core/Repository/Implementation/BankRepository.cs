@@ -21,14 +21,26 @@ namespace Payment.DAL.Core.Repository.Implementation
 
         public bool ConfirmBank(string bankName, string bankCode)
         {
-            return Context.Set<Bank>().Where(c => c.BankName.Trim().ToLower() == bankName.Trim().ToLower() ||
-            c.Acronyms.Trim().ToLower() == bankCode.Trim().ToLower()).Any();
+            try
+            {
+                return Context.Set<Bank>().Where(c => c.BankName.Trim().ToLower() == bankName.Trim().ToLower() ||
+                c.Acronyms.Trim().ToLower() == bankCode.Trim().ToLower()).Any();
+            }
+            catch(Exception ex)
+            {
+                var m = ex.Message;
+                return false;
+            }
         }
-
+       
         public Bank GetBank(string bankName, string bankCode)
         {
             return Context.Set<Bank>().Where(c => c.BankName.Trim().ToLower() == bankName.Trim().ToLower() ||
            c.Acronyms.Trim().ToLower() == bankCode.Trim().ToLower()).FirstOrDefault();
+        }
+        public Bank GetBankById(string Id)
+        {
+            return Context.Set<Bank>().Where(c => c.BankNo.ToString()==Id).FirstOrDefault();
         }
     }
 }

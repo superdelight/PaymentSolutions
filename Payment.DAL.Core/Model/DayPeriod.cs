@@ -12,7 +12,7 @@ namespace Payment.DAL.Core.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class DayPeriod
+    public partial class DayPeriod : Period
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DayPeriod()
@@ -20,11 +20,9 @@ namespace Payment.DAL.Core.Model
             this.TransactionLogs = new HashSet<TransactionLog>();
         }
     
-        public long Id { get; set; }
         public Nullable<long> MonthId { get; set; }
     
         public virtual MonthPeriod MonthPeriod { get; set; }
-        public virtual Period Period { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransactionLog> TransactionLogs { get; set; }
     }

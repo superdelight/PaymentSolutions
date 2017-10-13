@@ -21,12 +21,9 @@
         <AssociationConnector Association="Payment_DEVModel.FK_AccountDetails_Bank" ManuallyRouted="false" />
         <AssociationConnector Association="Payment_DEVModel.FK_SplitPayment_AccountDetails" ManuallyRouted="false" />
         <AssociationConnector Association="Payment_DEVModel.FK_DayPeriod_MonthPeriod" ManuallyRouted="false" />
-        <AssociationConnector Association="Payment_DEVModel.FK_DayPeriod_Period" ManuallyRouted="false" />
         <AssociationConnector Association="Payment_DEVModel.FK_TransactionLog_DayPeriod" ManuallyRouted="false" />
-        <AssociationConnector Association="Payment_DEVModel.FK_FiscalPeriod_Period" ManuallyRouted="false" />
         <AssociationConnector Association="Payment_DEVModel.FK_MonthPeriod_FiscalPeriod" ManuallyRouted="false" />
         <AssociationConnector Association="Payment_DEVModel.FK_Payer_FiscalPeriod" ManuallyRouted="false" />
-        <AssociationConnector Association="Payment_DEVModel.FK_MonthPeriod_Period" ManuallyRouted="false" />
         <AssociationConnector Association="Payment_DEVModel.FK_Payer_School" ManuallyRouted="false" />
         <AssociationConnector Association="Payment_DEVModel.FK_PaymentInvoice_Payer" ManuallyRouted="false" />
         <AssociationConnector Association="Payment_DEVModel.FK_Payment_Payment" ManuallyRouted="false" />
@@ -37,6 +34,9 @@
         <AssociationConnector Association="Payment_DEVModel.FK_SplitPayment_Payment" ManuallyRouted="false" />
         <AssociationConnector Association="Payment_DEVModel.FK_PaymentEngine_School" ManuallyRouted="false" />
         <AssociationConnector Association="Payment_DEVModel.FK_TransactionLog_PaymentInvoice" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="Payment_DEVModel.DayPeriod" />
+        <InheritanceConnector EntityType="Payment_DEVModel.MonthPeriod" />
+        <InheritanceConnector EntityType="Payment_DEVModel.FiscalPeriod" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
