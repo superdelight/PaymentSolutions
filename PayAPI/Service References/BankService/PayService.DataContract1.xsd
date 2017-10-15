@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/PayService.DataContract" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/PayService.DataContract" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ServiceResponseOfboolean">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ServiceResponseOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/PayService.DataContract" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="boolean" Namespace="http://www.w3.org/2001/XMLSchema">
+          </GenericParameter>
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Result" type="xs:boolean" />
+          <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ServiceResponseOfboolean" nillable="true" type="tns:ServiceResponseOfboolean" />
+  <xs:complexType name="BaseResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Response" type="tns:ResponseCode" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BaseResponse" nillable="true" type="tns:BaseResponse" />
+  <xs:simpleType name="ResponseCode">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="OK" />
+      <xs:enumeration value="ValidationError" />
+      <xs:enumeration value="NotFound" />
+      <xs:enumeration value="ServerException" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ResponseCode" nillable="true" type="tns:ResponseCode" />
+  <xs:complexType name="ServiceResponseOfArrayOfBankDTOFZ_P5_PzyX">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ServiceResponseOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/PayService.DataContract" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfBankDTO" Namespace="http://schemas.datacontract.org/2004/07/PayService.DataContract">
+          </GenericParameter>
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Result" nillable="true" type="tns:ArrayOfBankDTO" />
+          <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ServiceResponseOfArrayOfBankDTOFZ_P5_PzyX" nillable="true" type="tns:ServiceResponseOfArrayOfBankDTOFZ_P5_PzyX" />
+  <xs:complexType name="ArrayOfBankDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BankDTO" nillable="true" type="tns:BankDTO" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBankDTO" nillable="true" type="tns:ArrayOfBankDTO" />
+  <xs:complexType name="BankDTO">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Acronyms" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BankId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BankName" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BankDTO" nillable="true" type="tns:BankDTO" />
+  <xs:complexType name="ServiceResponseOfBankDTOFZ_P5_PzyX">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ServiceResponseOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/PayService.DataContract" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="BankDTO" Namespace="http://schemas.datacontract.org/2004/07/PayService.DataContract">
+          </GenericParameter>
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Result" nillable="true" type="tns:BankDTO" />
+          <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ServiceResponseOfBankDTOFZ_P5_PzyX" nillable="true" type="tns:ServiceResponseOfBankDTOFZ_P5_PzyX" />
+</xs:schema>

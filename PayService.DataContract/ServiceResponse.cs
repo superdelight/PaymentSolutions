@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace PayService.DataContract
 {
-    [DataContract]
+    //[KnownType(typeof(BaseResponse))]
+    //[DataContract]
     public class ServiceResponse<T>:BaseResponse
     {
         public T Result { get; set; }

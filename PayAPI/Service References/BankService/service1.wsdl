@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BankService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_IBankService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/PayService.DataContract" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IBankService_CreateBank_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateBank" />
+  </wsdl:message>
+  <wsdl:message name="IBankService_CreateBank_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateBankResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBankService_GetAllBanks_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllBanks" />
+  </wsdl:message>
+  <wsdl:message name="IBankService_GetAllBanks_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllBanksResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBankService_GetBankById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBankById" />
+  </wsdl:message>
+  <wsdl:message name="IBankService_GetBankById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBankByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBankService_GetBankByCode_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBankByCode" />
+  </wsdl:message>
+  <wsdl:message name="IBankService_GetBankByCode_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBankByCodeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IBankService">
+    <wsdl:operation name="CreateBank">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBankService/CreateBank" message="tns:IBankService_CreateBank_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBankService/CreateBankResponse" message="tns:IBankService_CreateBank_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBanks">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBankService/GetAllBanks" message="tns:IBankService_GetAllBanks_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBankService/GetAllBanksResponse" message="tns:IBankService_GetAllBanks_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBankById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBankService/GetBankById" message="tns:IBankService_GetBankById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBankService/GetBankByIdResponse" message="tns:IBankService_GetBankById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBankByCode">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBankService/GetBankByCode" message="tns:IBankService_GetBankByCode_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBankService/GetBankByCodeResponse" message="tns:IBankService_GetBankByCode_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_IBankService" type="tns:IBankService">
+    <wsp:PolicyReference URI="#NetTcpBinding_IBankService_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="CreateBank">
+      <soap12:operation soapAction="http://tempuri.org/IBankService/CreateBank" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBanks">
+      <soap12:operation soapAction="http://tempuri.org/IBankService/GetAllBanks" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBankById">
+      <soap12:operation soapAction="http://tempuri.org/IBankService/GetBankById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBankByCode">
+      <soap12:operation soapAction="http://tempuri.org/IBankService/GetBankByCode" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BankService">
+    <wsdl:port name="NetTcpBinding_IBankService" binding="tns:NetTcpBinding_IBankService">
+      <soap12:address location="net.tcp://wema-wdb-lc0370.wemabank.local/PayService/BankService.svc" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://wema-wdb-lc0370.wemabank.local/PayService/BankService.svc</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
