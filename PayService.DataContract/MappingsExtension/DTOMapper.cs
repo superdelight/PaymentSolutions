@@ -66,6 +66,54 @@ namespace PayService.DataContract.MappingsExtension
             return sch;
         }
 
+
+
+        public static PaymentDTO ToDTO(this Payment.DAL.Core.Model.Payment source)
+        {
+            if (source == null) return null;
+            return new PaymentDTO()
+            {
+                IsActive = source.IsActive,
+                DateCreated = source.DateCreated,
+                PaymentCode=source.PaymentCode,
+                PayEngineId=source.PayEngineId,
+                PaymentDescription=source.PaymentDescription,
+                PeriodId=source.PeriodId,
+                ReqId=source.ReqId,
+                SchId=source.SchId,
+                TotalAmount=source.TotalAmount
+            };
+        }
+        public static List<PaymentDTO> ToDTO(this List<Payment.DAL.Core.Model.Payment> source)
+        {
+            if (source == null) return new List<PaymentDTO>();
+            List<PaymentDTO> sch = new List<PaymentDTO>();
+            source.ForEach(o => sch.Add(o.ToDTO()));
+            return sch;
+        }
+
+
+        public static SplitPaymentDTO ToDTO(this SplitPayment source)
+        {
+            if (source == null) return null;
+            return new SplitPaymentDTO()
+            {
+                AccId = source.AccId,
+                DateCreated = source.DateCreated,
+                Description = source.Description,
+                PayId = source.PayId,
+                PaymentCode = source.PaymentCode,
+                Amount = source.Amount
+                 
+            };
+        }
+        public static List<SplitPaymentDTO> ToDTO(this List<SplitPayment> source)
+        {
+            if (source == null) return new List<SplitPaymentDTO>();
+            List<SplitPaymentDTO> sch = new List<SplitPaymentDTO>();
+            source.ForEach(o => sch.Add(o.ToDTO()));
+            return sch;
+        }
     }
 
 

@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Implementation\SchoolService.cs" />
     <Compile Include="Implementation\BankService.cs" />
+    <Compile Include="Interface\IPayService.cs" />
     <Compile Include="Interface\ISchoolService.cs" />
     <Compile Include="Interface\IBankService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
