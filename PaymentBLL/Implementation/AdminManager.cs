@@ -128,11 +128,89 @@ namespace PaymentBLL.Implementation
             response.Result= context.SchoolDAL.GetSchool(null,schoolCode);
             return response;
         }
-
+        public BusinessMessage<List<School>> GetAllSchools()
+        {
+            BusinessMessage<List<School>> response = new BusinessMessage<List<School>>();
+            response.Result = context.SchoolDAL.GetAll().ToList();
+            return response;
+        }
         public BusinessMessage<Bank> GetBankById(string Id)
         {
             BusinessMessage<Bank> response = new BusinessMessage<Bank>();
             response.Result = context.BankDAL.GetBankById(Id);
+            return response;
+        }
+
+        public BusinessMessage<bool> CreateNewAccount(string AccountNo, string AccountNam, int bankId)
+        {
+            AccountDetail acc = new AccountDetail
+            {
+                AccountName = AccountNam,
+                AccountNo = AccountNo,
+                BkId = bankId
+            } ;
+            BusinessMessage<bool> response = new BusinessMessage<bool>();
+            try
+            {
+                var bank = context.BankDAL.GetSingle(bankId);
+                if (bank!=null)
+                {
+                    if (!context.AccountDetailDAL.ConfirmAccountDetail(AccountNo))
+                    {
+                        context.AccountDetailDAL.Add(acc);
+                        if (context.SaveChanges() > 0)
+                        {
+                            response.Response = ResponseCode.OK;
+                            response.Message = string.Format("You have successfully added {0} to {1}",AccountNo, bank.BankName);
+                            response.Result = true;
+                        }
+                        else
+                        {
+                            response.Response = ResponseCode.Error;
+                            response.Message = string.Format("The system was unable to complete the operation");
+                            response.Result = false;
+                        }
+                    }
+                    else
+                    {
+                        response.Response = ResponseCode.Error;
+                        response.Message = string.Format("Duplicate entry is not allowed ");
+                        response.Result = false;
+                    }
+                }
+                else
+                {
+                    response.Response = ResponseCode.Error;
+                    response.Message = string.Format("Unable to retrieve bank details ");
+                    response.Result = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                response.Response = ResponseCode.ServerException;
+                response.Message = ex.InnerException.Message;
+                response.Result = false;
+            }
+            return response;
+        }
+
+        public BusinessMessage<AccountDetail> GetAccountDetail(string AccountNo)
+        {
+            BusinessMessage<AccountDetail> response = new BusinessMessage<AccountDetail>();
+            response.Result = context.AccountDetailDAL.GetAccountDetail(AccountNo);
+            return response;
+        }
+
+        public BusinessMessage<List<AccountDetail>> GetAllAccountDetail()
+        {
+            BusinessMessage<List<AccountDetail>> response = new BusinessMessage<List<AccountDetail>>();
+            response.Result = context.AccountDetailDAL.GetAll().ToList();
+            return response;
+        }
+        public BusinessMessage<List<AccountDetail>> GetAllAccountDetail(int bankId)
+        {
+            BusinessMessage<List<AccountDetail>> response = new BusinessMessage<List<AccountDetail>>();
+            response.Result = context.AccountDetailDAL.GetAllAccountDetail(bankId).ToList();
             return response;
         }
     }

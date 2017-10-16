@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Mvc;
 
 namespace PayAPI.Areas.Secured.Controllers
 {
@@ -24,7 +25,7 @@ namespace PayAPI.Areas.Secured.Controllers
             }
             catch
             {
-                return null;
+                throw new HttpResponseException(HttpStatusCode.NotFound);
             }
         }
         
@@ -42,6 +43,7 @@ namespace PayAPI.Areas.Secured.Controllers
         // PUT: api/BankAPI/5
         public void Put(int id, [FromBody]string value)
         {
+
         }
 
         // DELETE: api/BankAPI/5

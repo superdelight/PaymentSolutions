@@ -21,6 +21,13 @@ namespace PayService.Implementation.Interface
         ServiceResponse<BankDTO> GetBankById(string bankId);
         [OperationContract]
         ServiceResponse<BankDTO> GetBankByCode(string code);
-      
+        [OperationContract]
+        ServiceResponse<AccountDetailDTO> GetAccountDetail(string accountNo);
+        [OperationContract]
+        ServiceResponse<List<AccountDetailDTO>> GetAllAccountDetails();
+        [OperationContract]
+        ServiceResponse<bool> CreateAccountNo(string accountName, string accountNo, int bankId);
+        [OperationContract]
+        ServiceResponse<List<AccountDetailDTO>> GetAllAccountDetailByBank(int bankId);
     }
 }

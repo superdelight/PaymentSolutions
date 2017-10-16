@@ -11,5 +11,6 @@ namespace Payment.DAL.Core.Repository.Interface
     {
         bool ConfirmAccountDetail(string accountNumber);
         AccountDetail GetAccountDetail(string accountNumber);
+        List<AccountDetail> GetAllAccountDetail(int bankId);
     }
 }

@@ -24,6 +24,7 @@ namespace PayService
             container.RegisterType<IPaymentCoreContext, PaymentCoreContext>();
             //Services
             container.RegisterType<IBankService, BankService>();
+            container.RegisterType<ISchoolService, SchoolService>();
         }
     }    
 }

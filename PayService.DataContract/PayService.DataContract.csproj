@@ -45,6 +45,8 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountDetailDTO.cs" />
+    <Compile Include="SchoolDTO.cs" />
     <Compile Include="BankDTO.cs" />
     <Compile Include="BaseResponse.cs" />
     <Compile Include="MappingsExtension\DTOMapper.cs" />

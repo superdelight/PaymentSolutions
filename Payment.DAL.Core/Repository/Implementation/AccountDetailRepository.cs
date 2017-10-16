@@ -28,5 +28,9 @@ namespace Payment.DAL.Core.Repository.Implementation
         {
             return Context.Set<AccountDetail>().Where(c => c.AccountNo.Trim().ToLower() == accountNumber.Trim().ToLower()).FirstOrDefault();
         }
+        public List<AccountDetail> GetAllAccountDetail(int bankId)
+        {
+            return Context.Set<AccountDetail>().Where(c => c.BkId==bankId).ToList();
+        }
     }
 }
