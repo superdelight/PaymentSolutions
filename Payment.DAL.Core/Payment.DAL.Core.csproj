@@ -73,6 +73,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PaymentContext.cs" />
     <Compile Include="Model\AccountDetail.cs" />
     <Compile Include="Model\Bank.cs" />
@@ -88,10 +89,14 @@
     <Compile Include="Model\SplitPayment.cs" />
     <Compile Include="Model\TransactionLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\Implementation\PaymentSplitRepository.cs" />
+    <Compile Include="Repository\Implementation\PaymentRepository.cs" />
     <Compile Include="Repository\Implementation\BankRepository.cs" />
     <Compile Include="Repository\Implementation\AccountDetailRepository.cs" />
     <Compile Include="Repository\Implementation\SchoolRepository.cs" />
     <Compile Include="Repository\Implementation\Repository.cs" />
+    <Compile Include="Repository\Interface\IPaymentSplitRepository.cs" />
+    <Compile Include="Repository\Interface\IPaymentRepository.cs" />
     <Compile Include="Service\PaymentCoreContext.cs" />
     <Compile Include="Repository\Interface\Class1.cs" />
     <Compile Include="Repository\Interface\IPaymentCoreContext.cs" />

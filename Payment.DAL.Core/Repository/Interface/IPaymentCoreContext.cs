@@ -12,6 +12,8 @@ namespace Payment.DAL.Core.Repository.Interface
         ISchoolRepository SchoolDAL { get; }
         IBankRepository BankDAL { get; }
         IAccountDetailRepository AccountDetailDAL { get;}
+        IPaymentSplitRepository PaymentSplitDAL { get; }
+        IPaymentRepository PaymentDAL { get; }
         int SaveChanges();
     }
 }

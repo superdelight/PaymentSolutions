@@ -141,12 +141,12 @@ namespace PaymentBLL.Implementation
             return response;
         }
 
-        public BusinessMessage<bool> CreateNewAccount(string AccountNo, string AccountNam, int bankId)
+        public BusinessMessage<bool> CreateNewAccount(string accountNo, string accountName,int bankId)
         {
             AccountDetail acc = new AccountDetail
             {
-                AccountName = AccountNam,
-                AccountNo = AccountNo,
+                AccountName = accountName,
+                AccountNo = accountNo,
                 BkId = bankId
             } ;
             BusinessMessage<bool> response = new BusinessMessage<bool>();
@@ -155,13 +155,13 @@ namespace PaymentBLL.Implementation
                 var bank = context.BankDAL.GetSingle(bankId);
                 if (bank!=null)
                 {
-                    if (!context.AccountDetailDAL.ConfirmAccountDetail(AccountNo))
+                    if (!context.AccountDetailDAL.ConfirmAccountDetail(accountNo))
                     {
                         context.AccountDetailDAL.Add(acc);
                         if (context.SaveChanges() > 0)
                         {
                             response.Response = ResponseCode.OK;
-                            response.Message = string.Format("You have successfully added {0} to {1}",AccountNo, bank.BankName);
+                            response.Message = string.Format("You have successfully added {0} to {1}",accountNo, bank.BankName);
                             response.Result = true;
                         }
                         else

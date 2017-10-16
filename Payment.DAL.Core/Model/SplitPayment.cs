@@ -16,6 +16,7 @@ namespace Payment.DAL.Core.Model
     {
         public int Id { get; set; }
         public string Description { get; set; }
+        public string PaymentCode { get; set; }
         public Nullable<float> Amount { get; set; }
         public Nullable<int> PayId { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }

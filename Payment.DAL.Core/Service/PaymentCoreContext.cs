@@ -18,9 +18,18 @@ namespace Payment.DAL.Core.Service
             SchoolDAL = new SchoolRepository(_context);
             AccountDetailDAL = new AccountDetailRepository(_context);
             BankDAL = new BankRepository(_context);
+            PaymentSplitDAL = new PaymentSplitRepository(_context);
+            PaymentDAL = new PaymentRepository(_context);
         }
         public IAccountDetailRepository AccountDetailDAL { get; private set; }
         public IBankRepository BankDAL { get; private set; }
+
+        public IPaymentRepository PaymentDAL { get; private set; }
+       
+
+        public IPaymentSplitRepository PaymentSplitDAL { get; private set; }
+       
+
         public ISchoolRepository SchoolDAL { get; private set; }
         public void Dispose()
         {

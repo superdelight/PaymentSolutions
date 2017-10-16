@@ -25,8 +25,10 @@ namespace Payment.DAL.Core.Model
         public string AccountName { get; set; }
         public string AccountType { get; set; }
         public Nullable<int> BkId { get; set; }
-    
-        public virtual Bank Bank { get; set; }
+        public Nullable<int> SchId { get; set; }
+
+        public virtual Bank Bank { get; set;}
+        public virtual School School { get; set;}
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SplitPayment> SplitPayments { get; set; }
     }

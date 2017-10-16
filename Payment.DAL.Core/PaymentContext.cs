@@ -13,7 +13,7 @@ namespace Payment.DAL.Core
     {
         public PaymentContext():base("PaymentContext")
         {
-
+            Database.SetInitializer<PaymentContext>(new DropCreateDatabaseIfModelChanges<PaymentContext>());
         }
         public DbSet<School> Schools { get; set; }
         public DbSet<Bank> Banks { get; set; }
@@ -22,6 +22,7 @@ namespace Payment.DAL.Core
         {
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            
         }
     }
 }
