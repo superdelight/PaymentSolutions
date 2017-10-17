@@ -20,13 +20,12 @@ namespace Payment.DAL.Core.Service
             BankDAL = new BankRepository(_context);
             PaymentSplitDAL = new PaymentSplitRepository(_context);
             PaymentDAL = new PaymentRepository(_context);
+            PaymentEngineDAL = new PaymentEngineRepository(_context);
         }
         public IAccountDetailRepository AccountDetailDAL { get; private set; }
         public IBankRepository BankDAL { get; private set; }
-
         public IPaymentRepository PaymentDAL { get; private set; }
-       
-
+        public IPaymentEngineRepository PaymentEngineDAL { get; private set; }
         public IPaymentSplitRepository PaymentSplitDAL { get; private set; }
        
 

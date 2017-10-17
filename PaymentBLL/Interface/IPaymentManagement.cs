@@ -11,13 +11,13 @@ namespace PaymentBLL.Interface
     public interface IPaymentManagement
     {
 
-        BusinessMessage<bool> CreatePaymentItem(Payment.DAL.Core.Model.Payment pay);
-        BusinessMessage<Payment.DAL.Core.Model.Payment> GetPaymentByCode(string paymentCode);
-        BusinessMessage<Payment.DAL.Core.Model.Payment> GetPayment(string paymentDescription);
-        BusinessMessage<List<Payment.DAL.Core.Model.Payment>> GetAllPayments();
-        BusinessMessage<List<Payment.DAL.Core.Model.Payment>> GetAllPaymentsPerPeriod(int periodId);
-        BusinessMessage<List<Payment.DAL.Core.Model.Payment>> GetAllSubPayments(int paymentId);
-        BusinessMessage<Payment.DAL.Core.Model.Payment> GetAllPreReqPayments(int paymentId);
+        BusinessMessage<bool> CreatePaymentItem(PaymentDetail pay);
+        BusinessMessage<PaymentDetail> GetPaymentByCode(string paymentCode);
+        BusinessMessage<PaymentDetail> GetPayment(string paymentDescription);
+        BusinessMessage<List<PaymentDetail>> GetAllPayments();
+        BusinessMessage<List<PaymentDetail>> GetAllPaymentsPerPeriod(int periodId);
+        BusinessMessage<List<PaymentDetail>> GetAllSubPayments(int paymentId);
+        BusinessMessage<PaymentDetail> GetAllPreReqPayments(int paymentId);
 
 
         BusinessMessage<bool> CreateNewPaymentSplit(SplitPayment pay);
@@ -26,7 +26,10 @@ namespace PaymentBLL.Interface
         BusinessMessage<List<SplitPayment>> GetAllPaymentSplit(int payId);
         BusinessMessage<SplitPayment> GetPaymentSplit(string code);
 
-    
+        BusinessMessage<bool> CreateNewPaymentEngine(PaymentEngine payEngine);
+        BusinessMessage<PaymentEngine> GetPaymentEngineByCode(string paymentCode);
+        BusinessMessage<PaymentEngine> GetPaymentEngine(string description);
+        BusinessMessage<List<PaymentEngine>> GetAllPaymentEngine();
 
     }
 }

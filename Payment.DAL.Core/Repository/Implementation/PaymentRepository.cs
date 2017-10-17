@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Payment.DAL.Core.Repository.Implementation
 {
-    public class PaymentRepository : Repository<Payment.DAL.Core.Model.Payment>, IPaymentRepository
+    public class PaymentRepository : Repository<PaymentDetail>, IPaymentRepository
     {
         private DbContext Context;
         public PaymentRepository(DbContext Context)
@@ -19,33 +19,33 @@ namespace Payment.DAL.Core.Repository.Implementation
             this.Context = Context;
         }
 
-        public List<Model.Payment> GetAllPayments()
+        public List<PaymentDetail> GetAllPayments()
         {
-            return Context.Set<Model.Payment>().ToList();
+            return Context.Set<PaymentDetail>().ToList();
         }
 
-        public List<Model.Payment> GetAllPaymentsPerPeriod(int periodId)
+        public List<PaymentDetail> GetAllPaymentsPerPeriod(int periodId)
         {
-            return Context.Set<Model.Payment>().Where(c=>c.PeriodId==periodId).ToList();
+            return Context.Set<PaymentDetail>().Where(c=>c.PeriodId==periodId).ToList();
         }
 
-        public Model.Payment GetAllPreReqPayments(int paymentId)
+        public PaymentDetail GetAllPreReqPayments(int paymentId)
         {
-            return Context.Set<Model.Payment>().Where(c => c.ReqId == paymentId).FirstOrDefault();
+            return Context.Set<PaymentDetail>().Where(c => c.ReqId == paymentId).FirstOrDefault();
         }
 
-        public List<Model.Payment> GetAllSubPayments(int paymentId)
+        public List<PaymentDetail> GetAllSubPayments(int paymentId)
         {
-            return Context.Set<Model.Payment>().Where(c => c.Id == paymentId).ToList();
+            return Context.Set<PaymentDetail>().Where(c => c.Id == paymentId).ToList();
         }
 
-        public Model.Payment GetPayment(string paymentDescription)
+        public PaymentDetail GetPayment(string paymentDescription)
         {
-            return Context.Set<Model.Payment>().Where(c => c.PaymentDescription.ToLower() == paymentDescription.ToLower()).FirstOrDefault();
+            return Context.Set<PaymentDetail>().Where(c => c.PaymentDescription.ToLower() == paymentDescription.ToLower()).FirstOrDefault();
         }
-        public Model.Payment GetPaymentByCode(string paymentCode)
+        public PaymentDetail GetPaymentByCode(string paymentCode)
         {
-            return Context.Set<Model.Payment>().Where(c => c.PaymentCode.ToLower() == paymentCode.ToLower()).FirstOrDefault();
+            return Context.Set<PaymentDetail>().Where(c => c.PaymentCode.ToLower() == paymentCode.ToLower()).FirstOrDefault();
         }
 
        

@@ -23,6 +23,6 @@ namespace Payment.DAL.Core.Model
         public Nullable<int> AccId { get; set; }
     
         public virtual AccountDetail AccountDetail { get; set; }
-        public virtual Payment Payment { get; set; }
+        public virtual PaymentDetail Payment { get; set; }
     }
 }

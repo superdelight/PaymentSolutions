@@ -18,7 +18,7 @@ namespace Payment.DAL.Core.Model
         public School()
         {
             this.Payers = new HashSet<Payer>();
-            this.Payments = new HashSet<Payment>();
+            this.Payments = new HashSet<PaymentDetail>();
             this.PaymentEngines = new HashSet<PaymentEngine>();
             this.AccountDetails = new HashSet<AccountDetail>();
         }
@@ -32,7 +32,7 @@ namespace Payment.DAL.Core.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Payer> Payers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Payment> Payments { get; set; }
+        public virtual ICollection<PaymentDetail> Payments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PaymentEngine> PaymentEngines { get; set; }
     }

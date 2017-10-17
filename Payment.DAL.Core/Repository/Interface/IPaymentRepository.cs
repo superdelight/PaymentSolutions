@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Payment.DAL.Core.Repository.Interface
 {
-    public interface IPaymentRepository : IRepository<Payment.DAL.Core.Model.Payment>
+    public interface IPaymentRepository : IRepository<PaymentDetail>
     {
 
-        Payment.DAL.Core.Model.Payment GetPaymentByCode(string paymentCode);
-        Payment.DAL.Core.Model.Payment GetPayment(string paymentDescription);
-        List<Payment.DAL.Core.Model.Payment> GetAllPayments();
-        List<Payment.DAL.Core.Model.Payment> GetAllPaymentsPerPeriod(int periodId);
-        List<Payment.DAL.Core.Model.Payment> GetAllSubPayments(int paymentId);
-        Payment.DAL.Core.Model.Payment GetAllPreReqPayments(int paymentId);
+        PaymentDetail GetPaymentByCode(string paymentCode);
+        PaymentDetail GetPayment(string paymentDescription);
+        List<PaymentDetail> GetAllPayments();
+        List<PaymentDetail> GetAllPaymentsPerPeriod(int periodId);
+        List<PaymentDetail> GetAllSubPayments(int paymentId);
+        PaymentDetail GetAllPreReqPayments(int paymentId);
     }
 }

@@ -66,9 +66,32 @@ namespace PayService.DataContract.MappingsExtension
             return sch;
         }
 
+        public static PaymentEngineDTO ToDTO(this PaymentEngine source)
+        {
+            if (source == null) return null;
+            return new PaymentEngineDTO()
+            {
+                PaymentId = source.PaymentId,
+                PaymentUpdateURL = source.PaymentUpdateURL,
+                PaymentURL = source.PaymentURL,
+                ProductId = source.ProductId,
+                PaymentDescription = source.PaymentDescription,
+                Currency=source.Currency,
+                MacKey = source.MacKey,
+                SchId = source.SchId,
+                PaymentCode=source.PaymentCode
+            };
+        }
 
+        public static List<PaymentEngineDTO> ToDTO(this List<PaymentEngine> source)
+        {
+            if (source == null) return new List<PaymentEngineDTO>();
+            List<PaymentEngineDTO> sch = new List<PaymentEngineDTO>();
+            source.ForEach(o => sch.Add(o.ToDTO()));
+            return sch;
+        }
 
-        public static PaymentDTO ToDTO(this Payment.DAL.Core.Model.Payment source)
+        public static PaymentDTO ToDTO(this PaymentDetail source)
         {
             if (source == null) return null;
             return new PaymentDTO()
@@ -84,7 +107,8 @@ namespace PayService.DataContract.MappingsExtension
                 TotalAmount=source.TotalAmount
             };
         }
-        public static List<PaymentDTO> ToDTO(this List<Payment.DAL.Core.Model.Payment> source)
+
+        public static List<PaymentDTO> ToDTO(this List<PaymentDetail> source)
         {
             if (source == null) return new List<PaymentDTO>();
             List<PaymentDTO> sch = new List<PaymentDTO>();

@@ -1,4 +1,5 @@
-﻿using PayService.DataContract;
+﻿using Payment.DAL.Core.Model;
+using PayService.DataContract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,15 @@ namespace PayService.Implementation.Interface
         ServiceResponse<List<SplitPaymentDTO>> GetAllPaymentSplit(int payId);
         [OperationContract]
         ServiceResponse<SplitPaymentDTO> GetPaymentSplit(string code);
+
+        [OperationContract]
+        ServiceResponse<bool> CreateNewPaymentEngine(PaymentEngineDTO payEngine);
+        [OperationContract]
+        ServiceResponse<PaymentEngineDTO> GetPaymentEngineByCode(string paymentCode);
+        [OperationContract]
+        ServiceResponse<PaymentEngineDTO> GetPaymentEngine(string description);
+        [OperationContract]
+        ServiceResponse<List<PaymentEngineDTO>> GetAllPaymentEngine();
 
     }
 }

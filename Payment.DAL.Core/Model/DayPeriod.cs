@@ -11,7 +11,8 @@ namespace Payment.DAL.Core.Model
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+    [Table("DayPeriods")]
     public partial class DayPeriod : Period
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

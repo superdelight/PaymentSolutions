@@ -14,6 +14,7 @@ namespace Payment.DAL.Core.Repository.Interface
         IAccountDetailRepository AccountDetailDAL { get;}
         IPaymentSplitRepository PaymentSplitDAL { get; }
         IPaymentRepository PaymentDAL { get; }
+        IPaymentEngineRepository PaymentEngineDAL { get; }
         int SaveChanges();
     }
 }

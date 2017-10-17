@@ -17,7 +17,7 @@ namespace Payment.DAL.Core.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public PaymentEngine()
         {
-            this.Payments = new HashSet<Payment>();
+            this.Payments = new HashSet<PaymentDetail>();
         }
     
         public int Id { get; set; }
@@ -27,12 +27,13 @@ namespace Payment.DAL.Core.Model
         public string ProductId { get; set; }
         public string Currency { get; set; }
         public string PaymentUpdateURL { get; set; }
+        public string PaymentCode { get; set;}
         public string PaymentURL { get; set; }
         public Nullable<int> SchId { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Payment> Payments { get; set; }
+        public virtual ICollection<PaymentDetail> Payments { get; set; }
         public virtual School School { get; set; }
     }
 }

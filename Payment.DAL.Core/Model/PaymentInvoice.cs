@@ -31,7 +31,7 @@ namespace Payment.DAL.Core.Model
         public string RevenueCode { get; set; }
     
         public virtual Payer Payer { get; set; }
-        public virtual Payment Payment { get; set; }
+        public virtual PaymentDetail Payment { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransactionLog> TransactionLogs { get; set; }
     }

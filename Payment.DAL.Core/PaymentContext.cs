@@ -17,8 +17,9 @@ namespace Payment.DAL.Core
         }
         public DbSet<School> Schools { get; set; }
         public DbSet<Bank> Banks { get; set; }
+        public DbSet<Period> Periods { get; set; }
         public DbSet<AccountDetail> AccountDetails { get; set; }
-        public DbSet<Payment.DAL.Core.Model.Payment> Payments { get; set; }
+        public DbSet<PaymentDetail> Payments { get; set; }
         public DbSet<SplitPayment> SplitPayments { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

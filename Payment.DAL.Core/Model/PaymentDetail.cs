@@ -12,12 +12,12 @@ namespace Payment.DAL.Core.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Payment
+    public partial class PaymentDetail
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Payment()
+        public PaymentDetail()
         {
-            this.Payment1 = new HashSet<Payment>();
+            this.Payment1 = new HashSet<PaymentDetail>();
             this.PaymentInvoices = new HashSet<PaymentInvoice>();
             this.SplitPayments = new HashSet<SplitPayment>();
         }
@@ -34,8 +34,8 @@ namespace Payment.DAL.Core.Model
         public Nullable<bool> IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Payment> Payment1 { get; set; }
-        public virtual Payment Payment2 { get; set; }
+        public virtual ICollection<PaymentDetail> Payment1 { get; set; }
+        public virtual PaymentDetail Payment2 { get; set; }
         public virtual PaymentEngine PaymentEngine { get; set; }
         public virtual Period Period { get; set; }
         public virtual School School { get; set; }
