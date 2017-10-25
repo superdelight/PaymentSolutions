@@ -46,9 +46,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Implementation\PayService.cs" />
+    <Compile Include="Implementation\TransactionService.cs" />
     <Compile Include="Implementation\SchoolService.cs" />
     <Compile Include="Implementation\BankService.cs" />
     <Compile Include="Interface\IPayService.cs" />
+    <Compile Include="Interface\ITransactionService.cs" />
     <Compile Include="Interface\ISchoolService.cs" />
     <Compile Include="Interface\IBankService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

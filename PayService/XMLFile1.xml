@@ -1,0 +1,6 @@
+﻿<payment_item_detail>
+  <item_details detail_ref="TESTING" college="LAUT">
+      <item_detail item_id="1" item_name="Tution Fee" item_amt="50000" bank_id="16" acct_num="08022133443" >       
+      </item_detail>
+  </item_details>
+</payment_item_detail>

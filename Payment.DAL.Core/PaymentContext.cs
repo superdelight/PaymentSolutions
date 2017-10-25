@@ -21,6 +21,9 @@ namespace Payment.DAL.Core
         public DbSet<AccountDetail> AccountDetails { get; set; }
         public DbSet<PaymentDetail> Payments { get; set; }
         public DbSet<SplitPayment> SplitPayments { get; set; }
+        public DbSet<Payer> Payers { get; set; }
+        public DbSet<TransactionLog> TransactionLogs { get; set; }
+        public DbSet<PaymentInvoice> PaymentInvoices { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

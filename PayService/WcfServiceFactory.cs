@@ -21,11 +21,13 @@ namespace PayService
             //Business Logic
             container.RegisterType<IAdminManager, AdminManager>();
             container.RegisterType<IPaymentManagement, PaymentManagement>();
+            container.RegisterType<ITransactionManagement, TransactionManagement>();
             //Unit of Work
             container.RegisterType<IPaymentCoreContext, PaymentCoreContext>();
             //Services
             container.RegisterType<IBankService, BankService>();
             container.RegisterType<ISchoolService, SchoolService>();
+            container.RegisterType<ITransactionService, TransactionService>();
             container.RegisterType<IPayService, PayService.Implementation.Implementation.PayService>();
         }
     }    

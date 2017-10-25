@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace PayService.DataContract
 {
 
-    //[DataContract]
+    [DataContract]
     public class BaseResponse
     {
         [DataMember]

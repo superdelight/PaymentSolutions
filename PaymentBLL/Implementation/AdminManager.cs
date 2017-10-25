@@ -128,6 +128,12 @@ namespace PaymentBLL.Implementation
             response.Result= context.SchoolDAL.GetSchool(null,schoolCode);
             return response;
         }
+        public BusinessMessage<School> GetSchoolDefault()
+        {
+            BusinessMessage<School> response = new BusinessMessage<School>();
+            response.Result = context.SchoolDAL.GetDefaultSchool();
+            return response;
+        }
         public BusinessMessage<List<School>> GetAllSchools()
         {
             BusinessMessage<List<School>> response = new BusinessMessage<List<School>>();

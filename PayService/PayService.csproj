@@ -128,12 +128,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="PayService.svc" />
+    <Content Include="TransactionService.svc" />
     <Content Include="SchoolService.svc" />
     <Content Include="BankService.svc" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Unity.Wcf.README.txt" />
     <Content Include="Web.config" />
+    <Content Include="XMLFile1.xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />

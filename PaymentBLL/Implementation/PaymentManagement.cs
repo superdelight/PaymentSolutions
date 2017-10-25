@@ -246,7 +246,7 @@ namespace PaymentBLL.Implementation
             BusinessMessage<PaymentDetail> response = new BusinessMessage<PaymentDetail>();
             try
             {
-                response.Result = context.PaymentDAL.GetPayment(paymentCode);
+                response.Result = context.PaymentDAL.GetPaymentByCode(paymentCode);
                 response.Response = ResponseCode.OK;
             }
             catch
@@ -337,7 +337,22 @@ namespace PaymentBLL.Implementation
             }
             return response;
         }
-
+        public BusinessMessage<PaymentEngine> GetPaymentEngine(int Id)
+        {
+            BusinessMessage<PaymentEngine> response = new Utility.BusinessMessage<PaymentEngine>();
+            try
+            {
+                response.Result = context.PaymentEngineDAL.GetSingle(Id);
+                response.Response = ResponseCode.OK;
+            }
+            catch (Exception ex)
+            {
+                response.Result = null;
+                response.Response = ResponseCode.ServerException;
+                response.Message = ex.Message;
+            }
+            return response;
+        }
         public BusinessMessage<List<PaymentEngine>> GetAllPaymentEngine()
         {
             BusinessMessage<List<PaymentEngine>> response = new Utility.BusinessMessage<List<PaymentEngine>>();

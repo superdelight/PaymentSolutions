@@ -17,7 +17,7 @@ namespace PaymentBLL.Interface
         BusinessMessage<bool> CreateNewBank(string bankName, string bankCode, string bankId);
         BusinessMessage<bool> CreateSchool(string schoolName, string schoolCode);
         BusinessMessage<School> GetSchoolByCode(string schoolCode);
-
+        BusinessMessage<School> GetSchoolDefault();
         BusinessMessage<List<Bank>> GetAllBanks();
         BusinessMessage<Bank> GetBankByName(string bankName);
         BusinessMessage<Bank> GetBankByCode(string bankCode);

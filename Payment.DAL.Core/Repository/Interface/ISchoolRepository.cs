@@ -11,5 +11,6 @@ namespace Payment.DAL.Core.Repository.Interface
     {
         bool ConfirmSchool(string schoolName, string schoolCode);
         School GetSchool(string schoolName, string schoolCode);
+        School GetDefaultSchool();
     }
 }

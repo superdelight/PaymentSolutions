@@ -26,7 +26,7 @@ namespace Payment.DAL.Core.Repository.Implementation
 
         public List<SplitPayment> GetAllPaymentSplit(int payId)
         {
-            return Context.Set<SplitPayment>().Where(c => c.Id == payId).ToList();
+            return Context.Set<SplitPayment>().Where(c => c.PayId == payId).ToList();
         }
 
         public SplitPayment GetPaymentSplitByCode(string Code)

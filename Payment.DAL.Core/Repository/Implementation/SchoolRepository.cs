@@ -27,5 +27,10 @@ namespace Payment.DAL.Core.Repository.Implementation
             return Context.Set<School>().Where(c => c.SchoolName.Trim().ToLower() == schoolName.Trim().ToLower() || schoolCode.Trim().ToLower() == schoolCode.Trim().ToLower()).FirstOrDefault();
 
         }
+        public School GetDefaultSchool()
+        {
+            return Context.Set<School>().FirstOrDefault();
+
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace PaymentBLL.Interface
         BusinessMessage<List<PaymentDetail>> GetAllSubPayments(int paymentId);
         BusinessMessage<PaymentDetail> GetAllPreReqPayments(int paymentId);
 
-
+        BusinessMessage<PaymentEngine> GetPaymentEngine(int Id);
         BusinessMessage<bool> CreateNewPaymentSplit(SplitPayment pay);
 
         BusinessMessage<SplitPayment> GetPaymentSplitByCode(string Code);

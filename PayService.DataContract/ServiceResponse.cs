@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace PayService.DataContract
 {
-    //[KnownType(typeof(BaseResponse))]
-    //[DataContract]
+    [KnownType(typeof(BaseResponse))]
+    [DataContract]
     public class ServiceResponse<T>:BaseResponse
     {
+        [DataMember]
         public T Result { get; set; }
         public bool Success { get; set; }
     }

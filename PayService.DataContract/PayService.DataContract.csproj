@@ -46,6 +46,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountDetailDTO.cs" />
+    <Compile Include="TransactionEntryDTO.cs" />
+    <Compile Include="TransactionDTO.cs" />
     <Compile Include="PaymentEngineDTO.cs" />
     <Compile Include="PaymentDTO.cs" />
     <Compile Include="SplitPaymentDTO.cs" />

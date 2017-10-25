@@ -21,15 +21,22 @@ namespace Payment.DAL.Core.Service
             PaymentSplitDAL = new PaymentSplitRepository(_context);
             PaymentDAL = new PaymentRepository(_context);
             PaymentEngineDAL = new PaymentEngineRepository(_context);
+            PaymentInvoiceDAL = new PaymentInvoiceRepository(_context);
+            PayerDAL = new PayerRepository(_context);
+            TransactionDAL = new TransactionRepository(_context);
         }
         public IAccountDetailRepository AccountDetailDAL { get; private set; }
         public IBankRepository BankDAL { get; private set; }
+
+        public IPayerRepository PayerDAL { get; private set; }
         public IPaymentRepository PaymentDAL { get; private set; }
         public IPaymentEngineRepository PaymentEngineDAL { get; private set; }
+        public IPaymentInvoiceRepository PaymentInvoiceDAL { get; private set; }
         public IPaymentSplitRepository PaymentSplitDAL { get; private set; }
-       
-
         public ISchoolRepository SchoolDAL { get; private set; }
+
+        public ITransactionRepository TransactionDAL { get; private set; }
+  
         public void Dispose()
         {
             _context.Dispose();
